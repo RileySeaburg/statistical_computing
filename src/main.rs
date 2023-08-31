@@ -17,13 +17,23 @@ use std::f64;
 /// # Example
 ///
 /// ```
-/// let p1 = 0.20;
-/// let n1 = 1000;
-/// let p2 = 0.33;
-/// let n2 = 800;
-/// let result = ab_conversion_test(p1, n1, p2, n2);
+///fn main() {
+///    let n1 = 1000;
+///    let x1 = 200;
+///    let n2 = 800;
+///    let x2 = 560;
+///    let p1 = x1 as f64 / n1 as f64;
+///    let p2 = x2 as f64 / n2 as f64;
+///    
+///    match ab_conversion_test(p1, n1, p2, n2) {
+///        Ok((winner, lo, hi)) if winner as usize == n1 => println!("Version A is the winner!\nThe increase in conversion rates is likely between {:.2}% and {:.2}%.", lo*100., hi*100.),
+///        Ok((winner, lo, hi)) if winner as usize == n2 => println!("Version B is the winner!\nThe increase in conversion rates is likely between {:.2}% and {:.2}%.", lo*100., hi*100.),
+///        Ok(_) => (),
+///        Err(e) => println!("{}", e),
+///    }
+///}
 /// ```
-fn ab_conversion_test(p1: f64, n1: usize, p2: f64, n2: usize) -> Result<(f64, f64, f64), &'static str> {
+pub fn ab_conversion_test(p1: f64, n1: usize, p2: f64, n2: usize) -> Result<(f64, f64, f64), &'static str> {
     if n1 < 5 || n2 < 5 {
         return Err("Insufficient sample size.");
     }
